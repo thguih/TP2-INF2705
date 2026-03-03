@@ -57,6 +57,17 @@ C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.h
   (compiling source file 'main.cpp')
   
   model.cpp
+  shaders.cpp
+  shader_program.cpp
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\utils.hpp(95,103): warning C4244: 'argument': conversion from '_Rep' to 'unsigned int', possible loss of data
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\utils.hpp(95,103): warning C4244:         with
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\utils.hpp(95,103): warning C4244:         [
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\utils.hpp(95,103): warning C4244:             _Rep=std::chrono::system_clock::rep
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\utils.hpp(95,103): warning C4244:         ]
+  (compiling source file 'shader_program.cpp')
+  
+  textures.cpp
+  uniform_buffer.cpp
   Generating Code...
   TP.vcxproj -> C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\build\x64\Debug\TP.exe
   'pwsh.exe' is not recognized as an internal or external command,
