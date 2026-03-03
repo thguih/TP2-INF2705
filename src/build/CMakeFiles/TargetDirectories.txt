@@ -1,0 +1,3 @@
+/Users/theo/Desktop/POLY/H26/INF2705 - Infographie/TP1-2705/src/build/CMakeFiles/TP.dir
+/Users/theo/Desktop/POLY/H26/INF2705 - Infographie/TP1-2705/src/build/CMakeFiles/edit_cache.dir
+/Users/theo/Desktop/POLY/H26/INF2705 - Infographie/TP1-2705/src/build/CMakeFiles/rebuild_cache.dir
