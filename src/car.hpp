@@ -42,9 +42,10 @@ private:
     Model blinker_;
     Model light_;
 
-    Model windows_[6];
+    Model windows[6];
     glm::mat4 projectionView_;
     glm::mat4 currentMatrix_;
+
     
 public:
 
