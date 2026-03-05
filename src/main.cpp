@@ -298,7 +298,7 @@ struct App : public OpenGLApplication
     void loadModels()
     {
         car_.loadModels();
-        tree_.load("../models/tree.ply");
+        tree_.load("../models/pine.ply");
         streetlight_.load("../models/streetlight.ply");
         streetlightLight_.load("../models/streetlight_light.ply");
         skybox_.load("../models/skybox.ply");
