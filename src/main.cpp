@@ -305,6 +305,10 @@ struct App : public OpenGLApplication
         
         // TODO: Ajouter le chargement du sol et de la route avec la nouvelle méthode load
         //       des modèles. Voir "model_data.hpp".
+
+        grass_.load(ground, sizeof(ground), planeElements, sizeof(planeElements));
+        street_.load(street, sizeof(street), planeElements, sizeof(planeElements));
+        streetcorner_.load(streetcorner, sizeof(streetcorner), planeElements, sizeof(planeElements));
     }
     
     // Méthode pour le calcul des matrices initiales des arbres et des lampadaires.
@@ -605,6 +609,15 @@ struct App : public OpenGLApplication
         glm::mat4 view = getViewMatrix();
         glm::mat4 proj = getPerspectiveProjectionMatrix();
         glm::mat4 projView = proj * view;
+
+        celShadingShader_.use();   
+
+        drawGround(projView, view);
+        drawTrees(projView, view);
+        drawStreetlights(projView, view);
+
+        setMaterial(defaultMat);
+        car_.draw(projView);
         
         // TODO: Dessin des éléments
         // ...
