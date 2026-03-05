@@ -56,6 +56,20 @@ C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.h
 C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(361,51): warning C4244:         ]
   (compiling source file 'main.cpp')
   
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\main.cpp(161,14): error C2039: 'edgeEffectShader': is not a member of 'Car'
+      C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.hpp(8,7):
+      see declaration of 'Car'
+  
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\main.cpp(162,14): error C2039: 'celShadingShader': is not a member of 'Car'
+      C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.hpp(8,7):
+      see declaration of 'Car'
+  
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\main.cpp(163,14): error C2039: 'material': is not a member of 'Car'
+      C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.hpp(8,7):
+      see declaration of 'Car'
+  
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\main.cpp(524,9): error C3861: 'updateCameraInput': identifier not found
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\main.cpp(531,26): error C3861: 'getPerspectiveProjectionMatrix': identifier not found
   model.cpp
   shaders.cpp
   shader_program.cpp
@@ -69,6 +83,3 @@ C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\utils.hpp(95,103): 
   textures.cpp
   uniform_buffer.cpp
   Generating Code...
-  TP.vcxproj -> C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\build\x64\Debug\TP.exe
-  'pwsh.exe' is not recognized as an internal or external command,
-  operable program or batch file.

@@ -1,16 +1,15 @@
 #version 330 core
 
-// TODO: La couleur des fragments est donnée à partir de la couleur
-//       des vertices passée en entrée.
-//       De plus, une variable uniform permet de multiplier la couleur
-//       par une autre pour coloriser les fragments.
-
-in vec3 vColor; 
-out vec4 FragColor;
+in vec3 vColor;
+in vec2 vTexCoords;
 
 uniform vec3 uColorMod;
+uniform sampler2D diffuseSampler;
+
+out vec4 FragColor;
 
 void main()
 {
-    FragColor = vec4(vColor * uColorMod, 1.0);
+    vec4 tex = texture(diffuseSampler, vTexCoords);
+    FragColor = tex * vec4(vColor * uColorMod, 1.0);
 }

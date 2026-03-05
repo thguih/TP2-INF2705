@@ -19,8 +19,7 @@ void Model::load(const char* path)
     std::vector<unsigned char> colorRed   = vertex.getProperty<unsigned char>("red");
     std::vector<unsigned char> colorGreen = vertex.getProperty<unsigned char>("green");
     std::vector<unsigned char> colorBlue  = vertex.getProperty<unsigned char>("blue");
-
-
+    
     unsigned char rmin = 255, rmax = 0, gmin = 255, gmax = 0, bmin = 255, bmax = 0;
     for (size_t i = 0; i < colorRed.size(); ++i) {
         rmin = std::min(rmin, colorRed[i]); rmax = std::max(rmax, colorRed[i]);
