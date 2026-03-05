@@ -490,12 +490,87 @@ struct App : public OpenGLApplication
             lightsData_.spotLights[N_STREETLIGHTS+3].specular = glm::vec4(0.0f);
         }
     }
+
+
     
     // TODO: À ajouter. Pas de modification.
     void setMaterial(Material& mat)
     {
         // Ça vous donne une idée de comment utiliser les ubo dans car.cpp.
         material_.updateData(&mat, 0, sizeof(Material));
+    }
+
+    glm::mat4 getPerspectiveProjectionMatrix()
+    {
+        float fov = glm::radians(70.0f);
+        float aspect = (float)window_.getSize().x / (float)window_.getSize().y;
+        float near = 0.1f;
+        float far = 300.0f;
+
+        return glm::perspective(fov, aspect, near, far);
+    }
+
+    void onMouseMove(const sf::Event::MouseMoved& mouseDelta) override
+    {
+        if (isMouseMotionEnabled_)
+            return;
+
+    }
+
+    void updateCameraInput()
+    {
+        if (!window_.hasFocus())
+            return;
+
+        const float KEYBOARD_MOUSE_SENSITIVITY = 1.5f;
+
+        float cameraMouvementX = 0;
+        float cameraMouvementY = 0;
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+            cameraMouvementX -= KEYBOARD_MOUSE_SENSITIVITY;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+            cameraMouvementX += KEYBOARD_MOUSE_SENSITIVITY;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+            cameraMouvementY -= KEYBOARD_MOUSE_SENSITIVITY;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+            cameraMouvementY += KEYBOARD_MOUSE_SENSITIVITY;
+
+        cameraOrientation_.y -= cameraMouvementY * deltaTime_;
+        cameraOrientation_.x -= cameraMouvementX * deltaTime_;
+
+        if (isMouseMotionEnabled_)
+        {
+            sf::Vector2u windowSize = window_.getSize();
+            sf::Vector2i windowCenter(windowSize.x / 2, windowSize.y / 2);
+            sf::Vector2i mousePos = sf::Mouse::getPosition(window_);
+
+            sf::Vector2i delta = mousePos - windowCenter;
+
+            const float MOUSE_SENSITIVITY = 0.002f;
+            cameraOrientation_.y -= delta.x * MOUSE_SENSITIVITY;
+            cameraOrientation_.x -= delta.y * MOUSE_SENSITIVITY;
+
+            sf::Mouse::setPosition(windowCenter, window_);
+        }
+
+        glm::vec3 positionOffset = glm::vec3(0.0f);
+        const float SPEED = 10.f;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+            positionOffset.z -= SPEED;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+            positionOffset.z += SPEED;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+            positionOffset.x -= SPEED;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+            positionOffset.x += SPEED;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q))
+            positionOffset.y -= SPEED;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
+            positionOffset.y += SPEED;
+
+        positionOffset = glm::rotate(glm::mat4(1.0f), cameraOrientation_.y, glm::vec3(0.0f, 1.0f, 0.0f)) * glm::vec4(positionOffset, 1.0f);
+        cameraPosition_ += positionOffset * glm::vec3(deltaTime_);
     }
     
     // TODO: À ajouter et modifier.

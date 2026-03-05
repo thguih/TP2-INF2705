@@ -68,8 +68,6 @@ C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\main.cpp(163,14): error
       C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.hpp(8,7):
       see declaration of 'Car'
   
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\main.cpp(524,9): error C3861: 'updateCameraInput': identifier not found
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\main.cpp(531,26): error C3861: 'getPerspectiveProjectionMatrix': identifier not found
   model.cpp
   shaders.cpp
   shader_program.cpp
