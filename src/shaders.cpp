@@ -16,7 +16,7 @@ void EdgeEffect::load()
 
 void EdgeEffect::getAllUniformLocations()
 {
-    // TODO: Initialiser les valeurs de uniform location en attributs
+    mvpULoc = glGetUniformLocation(id_, "mvp");
 }
 
 
@@ -33,7 +33,11 @@ void Sky::load()
 
 void Sky::getAllUniformLocations()
 {
-    // TODO: Initialiser les valeurs de uniform location en attributs
+    mvpULoc = glGetUniformLocation(id_, "mvp");
+
+    use();
+    GLint texloc = glGetUniformLocation(id_, "textureSampler");
+    glUniform1i(texloc, 0);
 }
 
 
@@ -70,6 +74,7 @@ void CelShading::assignAllUniformBlockIndexes()
 void CelShading::setMatrices(glm::mat4& mvp, glm::mat4& view, glm::mat4& model)
 {
     glm::mat4 modelView = view * model;
+    glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(modelView)));
     
     glUniformMatrix4fv(viewULoc, 1, GL_FALSE, &view[0][0]);
     glUniformMatrix4fv(mvpULoc, 1, GL_FALSE, &mvp[0][0]);
