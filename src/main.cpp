@@ -172,6 +172,9 @@ struct App : public OpenGLApplication
 
         cameraPosition_ = glm::vec3(0.f, 5.f, 25.f);
         cameraOrientation_ = glm::vec2(-0.25f, 0.f);
+
+        car_.position = glm::vec3(0.0f, 0.0f, 13.5f);
+        car_.orientation = glm::vec3(0.0f, 0.0f, 0.0f);
         
         
         // TODO: Chargement des textures, ainsi que la configuration de leurs paramètres.
@@ -356,17 +359,105 @@ struct App : public OpenGLApplication
         streetcorner_.load(streetcorner, sizeof(streetcorner), planeElements, sizeof(planeElements));
     }
     
-    // Méthode pour le calcul des matrices initiales des arbres et des lampadaires.
     void initStaticModelMatrices()
     {
-        // ...
-        for (unsigned int i = 0; i < N_STREETLIGHTS; i++)
-        {
-            // ...
-            
-            // TODO: À ajouter. C'est pour avoir la position de la lumière du lampadaire pour la partie 3.
-            streetlightLightPositions[i] = glm::vec3(streetlightModelMatrices_[i] * glm::vec4(-2.77, 5.2, 0.0, 1.0));
+        //arbres
+        treeModelMatrices_[0] = glm::mat4(1.0f);
+        treeModelMatrices_[0] = glm::translate(treeModelMatrices_[0], glm::vec3(0.0f, -0.15f, 0.0f));
+        treeModelMatrices_[0] = glm::scale(treeModelMatrices_[0], glm::vec3(15.0f));
+
+        //patch de routes
+
+        const float TOTAL_LENGTH = 30.f;
+        const float NUM_SEGMENTS = 7.0F;
+        const float SEGMENT_LENGTH = TOTAL_LENGTH / NUM_SEGMENTS;
+
+        const float ROAD_WIDTH = 5.0f;
+        const float HALF_LENGTH = TOTAL_LENGTH / 2.0f;
+        const float ROAD_Y = 0.0f;
+        const float CORNER_Y = 0.01f;
+        const float LAMP_Y = -0.15f;
+        const float LAMP_OFFSET = 0.5F;
+        const float INNER_EDGE = HALF_LENGTH - (ROAD_WIDTH * 0.5f);
+        const float INNER_POSITION = INNER_EDGE - LAMP_OFFSET;
+        const float BASE_YAW = -90.0f;
+
+        const float l0 = -HALF_LENGTH / 2.0f;
+        const float l1 = HALF_LENGTH / 2.0f;
+
+        unsigned int lampidx = 0;
+        unsigned int idx = 0;
+
+        for (unsigned int i = 0; i < 7; ++i) {
+
+            const float t = -HALF_LENGTH + (i + 0.5f) * SEGMENT_LENGTH;
+
+            //route du haut
+            glm::mat4 roadSegment = glm::mat4(1.0f);
+            roadSegment = glm::translate(roadSegment, glm::vec3(t, ROAD_Y, -HALF_LENGTH));
+            roadSegment = glm::scale(roadSegment, glm::vec3(SEGMENT_LENGTH, 1.0f, ROAD_WIDTH));
+            streetPatchesModelMatrices_[idx++] = roadSegment;
+
+            //route du bas
+            roadSegment = glm::mat4(1.0f);
+            roadSegment = glm::translate(roadSegment, glm::vec3(t, ROAD_Y, HALF_LENGTH));
+            roadSegment = glm::scale(roadSegment, glm::vec3(SEGMENT_LENGTH, 1.0f, ROAD_WIDTH));
+            streetPatchesModelMatrices_[idx++] = roadSegment;
+
+            //route droite
+            roadSegment = glm::mat4(1.0f);
+            roadSegment = glm::translate(roadSegment, glm::vec3(HALF_LENGTH, ROAD_Y, t));
+            roadSegment = glm::rotate(roadSegment, glm::radians(90.0f), glm::vec3(0, 1, 0));
+            roadSegment = glm::scale(roadSegment, glm::vec3(SEGMENT_LENGTH, 1.0f, ROAD_WIDTH));
+            streetPatchesModelMatrices_[idx++] = roadSegment;
+
+            //route gauche
+            roadSegment = glm::mat4(1.0f);
+            roadSegment = glm::translate(roadSegment, glm::vec3(-HALF_LENGTH, ROAD_Y, t));
+            roadSegment = glm::rotate(roadSegment, glm::radians(90.0f), glm::vec3(0, 1, 0));
+            roadSegment = glm::scale(roadSegment, glm::vec3(SEGMENT_LENGTH, 1.0f, ROAD_WIDTH));
+            streetPatchesModelMatrices_[idx++] = roadSegment;
         }
+
+        auto makeCorner = [&](float x, float z)
+            {
+                glm::mat4 corner = glm::mat4(1.0f);
+                corner = glm::translate(corner, glm::vec3(x, CORNER_Y, z));
+                corner = glm::scale(corner, glm::vec3(ROAD_WIDTH, 1.0f, ROAD_WIDTH));
+                return corner;
+            };
+
+        streetPatchesModelMatrices_[idx++] = makeCorner(-HALF_LENGTH, -HALF_LENGTH);
+        streetPatchesModelMatrices_[idx++] = makeCorner(HALF_LENGTH, -HALF_LENGTH);
+        streetPatchesModelMatrices_[idx++] = makeCorner(HALF_LENGTH, HALF_LENGTH);
+        streetPatchesModelMatrices_[idx++] = makeCorner(-HALF_LENGTH, HALF_LENGTH);
+
+        auto pushLamp = [&](glm::vec3 pos, float degrees)
+            {
+                glm::mat4 lamp = glm::mat4(1.0f);
+                lamp = glm::translate(lamp, pos);
+                lamp = glm::rotate(lamp, glm::radians(degrees + BASE_YAW), glm::vec3(0, 1, 0));
+
+                streetlightModelMatrices_[lampidx++] = lamp;
+                streetlightLightPositions[lampidx - 1] = glm::vec3(streetlightModelMatrices_[lampidx -1] * glm::vec4(-2.77, 5.2, 0.0, 1.0));
+
+            };
+
+        // lampes du haut
+        pushLamp(glm::vec3(l0, LAMP_Y, -INNER_POSITION), 0.0f);
+        pushLamp(glm::vec3(l1, LAMP_Y, -INNER_POSITION), 0.0f);
+
+        // lampes du bas
+        pushLamp(glm::vec3(l0, LAMP_Y, +INNER_POSITION), 180.0f);
+        pushLamp(glm::vec3(l1, LAMP_Y, +INNER_POSITION), 180.0f);
+
+        // lampes droites
+        pushLamp(glm::vec3(+INNER_POSITION, LAMP_Y, l0), -90.0f);
+        pushLamp(glm::vec3(+INNER_POSITION, LAMP_Y, l1), -90.0f);
+
+        // lampes gauche
+        pushLamp(glm::vec3(-INNER_POSITION, LAMP_Y, l0), 90.0f);
+        pushLamp(glm::vec3(-INNER_POSITION, LAMP_Y, l1), 90.0f);
     }
     
     // TODO: À modifier, ajouter les textures, et l'effet de contour.
@@ -374,55 +465,94 @@ struct App : public OpenGLApplication
     //       votre code pour faire le dessin des deux parties.
     void drawStreetlights(glm::mat4& projView, glm::mat4& view)
     {
-        // ...
-        
+        glDisable(GL_CULL_FACE);
+
         for (unsigned int i = 0; i < N_STREETLIGHTS; i++)
         {
-            // ...
+            glm::mat4 mvp = projView * streetlightModelMatrices_[i];
 
             if (!isDay_)
                 setMaterial(streetlightLightMat);
             else
                 setMaterial(streetlightMat);
-            // TODO: Dessin du mesh de la lumière.
-            
+            glActiveTexture(GL_TEXTURE0);
+            streetlightLightTexture_.use();
+            celShadingShader_.setMatrices(mvp, view, streetlightModelMatrices_[i]);
+            streetlightLight_.draw();
+
             setMaterial(streetlightMat);
-            // TODO: Dessin du mesh du lampadaire.
+            streetlightTexture_.use();
+            celShadingShader_.setMatrices(mvp, view, streetlightModelMatrices_[i]);
+            streetlight_.draw();
         }
     }
     
     // TODO: À modifier, ajouter les textures, et l'effet de contour.
     void drawTrees(glm::mat4& projView, glm::mat4& view)
     {
-        // ...
-        
+        glDisable(GL_CULL_FACE);
+        setMaterial(grassMat);
+        glActiveTexture(GL_TEXTURE0);
+        treeTexture_.use();
         for (unsigned int i = 0; i < N_TREES; i++)
         {
-            // ...
+            glm::mat4 mvp = projView * treeModelMatrices_[i];
+            celShadingShader_.setMatrices(mvp, view, treeModelMatrices_[i]);
+            tree_.draw();
         }
+        glEnable(GL_CULL_FACE);
     }
     
-    // TODO: À modifier, ajouter les textures
     void drawGround(glm::mat4& projView, glm::mat4& view)
     {
-        // ...
-        //setMaterial(streetMat);
-        // TODO: Dessin de la route.
-        
+        setMaterial(streetMat);
+        glActiveTexture(GL_TEXTURE0);
+        for (unsigned int i = 0; i < N_STREET_PATCHES; i++) {
+            glm::mat4 mvp = projView * streetPatchesModelMatrices_[i];
+            celShadingShader_.setMatrices(mvp, view, streetPatchesModelMatrices_[i]);
+            if (i < 7u * 4u) {
+                streetTexture_.use();
+                street_.draw();
+            }
+            else{
+                streetcornerTexture_.use();
+                streetcorner_.draw();
+            }
+        }        
+
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(0.0f, -0.1f, 0.0f));
         model = glm::scale(model, glm::vec3(50.0f, -1.0f, 50.0f));
-        // ...
         setMaterial(grassMat);
-        // TODO: Dessin du sol.  
-        
         glActiveTexture(GL_TEXTURE0);
         grassTexture_.use();
-
         glm::mat4 mvp = projView * model;
         celShadingShader_.setMatrices(mvp, view, model);
-
         grass_.draw();
+    }
+
+    void drawSkyBox(glm::mat4& proj, glm::mat4& view) {
+
+        glm::mat4 skyView = glm::mat4(glm::mat3(view));
+        glm::mat4 mvp = proj * skyView;
+
+
+        glDepthFunc(GL_LEQUAL);
+        skyShader_.use();
+        glUniformMatrix4fv(skyShader_.mvpULoc, 1, GL_FALSE, glm::value_ptr(mvp));
+        glActiveTexture(GL_TEXTURE0);
+
+        if (isDay_) {
+            skyboxTexture_.use();
+        }
+        else {
+            skyboxNightTexture_.use();
+        }
+        skybox_.draw();
+        glDepthFunc(GL_LESS);
+
+        celShadingShader_.use();
+
     }
     
     // Solution
@@ -669,29 +799,20 @@ struct App : public OpenGLApplication
         celShadingShader_.use();   
 
         drawGround(projView, view);
-        /*drawTrees(projView, view);
-        drawStreetlights(projView, view);*/
+        setMaterial(grassMat);
+
+        drawTrees(projView, view);
+
+        setMaterial(streetlightMat);
+        drawStreetlights(projView, view);
 
         setMaterial(defaultMat);
         car_.draw(projView, view);
-        
-        // TODO: Dessin des éléments
-        // ...
-        // Penser à votre ordre de dessin, les todos sont volontairement mélangé ici.
-        
-        //setMaterial(windowMat);
-        //// TODO: Dessin des fenêtres
-        //
-        //setMaterial(defaultMat);
-        //// TODO: Dessin de l'automobile
-        //
-        //// TODO: Dessin du skybox
-        //
-        //setMaterial(grassMat);
-        //// TODO: Dessin des arbres. Oui, ils utilisent le même matériel que le sol.
-        //
-        //setMaterial(streetlightMat);
-        //// TODO: Dessin des lampadaires.
+
+        setMaterial(windowMat);
+        car_.drawWindows(projView, view);
+
+        drawSkyBox(proj, view);
     }
     
 private:
@@ -740,10 +861,12 @@ private:
     
     static constexpr unsigned int N_TREES = 1;
     static constexpr unsigned int N_STREETLIGHTS = 8;
+    static constexpr unsigned int N_STREET_PATCHES = 7 * 4 + 4;
     glm::mat4 treeModelMatrices_[N_TREES];
     glm::mat4 streetlightModelMatrices_[N_STREETLIGHTS];
     glm::vec3 streetlightLightPositions[N_STREETLIGHTS];
-    
+    glm::mat4 streetPatchesModelMatrices_[N_STREET_PATCHES];
+
     // Imgui var
     const char* const SCENE_NAMES[1] = {
         "Main scene"
