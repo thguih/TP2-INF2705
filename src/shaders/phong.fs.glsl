@@ -50,7 +50,6 @@ struct SpotLight
 };
 
 uniform int nSpotLights;
-
 uniform vec3 globalAmbient;
 
 layout (std140) uniform MaterialBlock
@@ -79,31 +78,70 @@ float computeSpot(in float openingAngle, in float exponent, in vec3 spotDir, in 
     if (cosGamma > cosDelta)
         spotFactor = pow(cosGamma, exponent);
     
-    return spotFactor
+    return spotFactor;
 }
 
 void main()
 {
-    // TODO: Calcul d'illumination
+    vec3 N = normalize(attribsIn.normal);
+    vec3 O = normalize(lightsIn.obsPos);
 
-    // Directional light
-    
-    // TODO: Seulement la lumière directionnel à l'effet de cel-shading, sur la composante diffuse et spéculaire
-    const float LEVELS = 4;
-        
-    // Spot light
-    
-    for(int i = 0; i < nSpotLights; i++)
+    vec4 texColor = texture(diffuseSampler, attribsIn.texCoords);
+    vec3 diffuseTex = texColor.rgb * mat.diffuse;
+
+    vec3 color = mat.emission + globalAmbient * mat.ambient;
+
     {
-        // TODO: Calcul des spotlights
-    
-        // Utiliser un facteur d'atténuation. On peut utiliser smoothstep avec la distance
-        // entre la surface illuminé et la source de lumière. Il devrait y avoir un effet de blending
-        // entre 7 et 10 unitées.
-        // Le facteur impacte la composante diffuse et spéculaire.
+        vec3 L = normalize(-lightsIn.dirLightDir);
+        float diff = max(dot(N, L), 0.0);
+
+        // Cel shading: quantize diffuse and specular
+        const float LEVELS = 4.0;
+        diff = floor(diff * LEVELS) / LEVELS;
+
+        vec3 R = reflect(-L, N);
+        float spec = 0.0;
+        if (diff > 0.0)
+        {
+            spec = pow(max(dot(R, O), 0.0), mat.shininess);
+            spec = floor(spec * LEVELS) / LEVELS;
+        }
+
+        color += dirLight.ambient * mat.ambient;
+        color += dirLight.diffuse * diffuseTex * diff;
+        color += dirLight.specular * mat.specular * spec;
     }
 
-    vec3 color = vec3(0);
-    //color += normal/2.0 + vec3(0.5); // DEBUG: Show normals
-    FragColor = vec4(color, 1.0);
+    for (int i = 0; i < nSpotLights; i++)
+    {
+        vec3 L = lightsIn.spotLightsDir[i];
+        float dist = length(L);
+        L = normalize(L);
+
+        float spotFactor = computeSpot(
+            spotLights[i].openingAngle,
+            spotLights[i].exponent,
+            lightsIn.spotLightsSpotDir[i],
+            L,
+            N
+        );
+
+        if (spotFactor > 0.0)
+        {
+            float attenuation = 1.0 - smoothstep(7.0, 10.0, dist);
+
+            float diff = max(dot(N, L), 0.0);
+            vec3 R = reflect(-L, N);
+            float spec = 0.0;
+            if (diff > 0.0)
+                spec = pow(max(dot(R, O), 0.0), mat.shininess);
+
+            color += spotLights[i].ambient * mat.ambient;
+            color += spotLights[i].diffuse * diffuseTex * diff * spotFactor * attenuation;
+            color += spotLights[i].specular * mat.specular * spec * spotFactor * attenuation;
+        }
+    }
+
+    FragColor = vec4(color, texColor.a);
 }
+

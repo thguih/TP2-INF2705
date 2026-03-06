@@ -74,18 +74,6 @@
       <Filter>VSCode Files</Filter>
     </None>
     <None Include="README.md" />
-    <None Include="shaders\basic.fs.glsl">
-      <Filter>Shader Source Files</Filter>
-    </None>
-    <None Include="shaders\basic.vs.glsl">
-      <Filter>Shader Source Files</Filter>
-    </None>
-    <None Include="shaders\transform.fs.glsl">
-      <Filter>Shader Source Files</Filter>
-    </None>
-    <None Include="shaders\transform.vs.glsl">
-      <Filter>Shader Source Files</Filter>
-    </None>
     <None Include="shaders\edge.fs.glsl">
       <Filter>Shader Source Files</Filter>
     </None>

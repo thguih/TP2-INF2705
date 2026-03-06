@@ -161,7 +161,8 @@ struct App : public OpenGLApplication
         //std::cout << "CelShading program id = " << celShadingShader_.id() << "\n";
         skyShader_.create();
         
-        
+
+                
         // TODO: À ajouter.
         car_.edgeEffectShader = &edgeEffectShader_;
         car_.celShadingShader = &celShadingShader_;
@@ -326,9 +327,7 @@ struct App : public OpenGLApplication
         {
             case 0: sceneMain(); break;
         }
-        std::cout << "BEFORE 328\n";
         CHECK_GL_ERROR;
-        std::cout << "AFTER 328\n";
     }
 
 

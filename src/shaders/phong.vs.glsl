@@ -75,7 +75,7 @@ void main()
 {
     // Attribs
 
-    gl_position = mvp * vec4(position, 1.0);
+    gl_Position = mvp * vec4(position, 1.0);
 
     attribsOut.texCoords = texCoords;
     attribsOut.color = color;
