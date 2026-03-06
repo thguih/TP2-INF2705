@@ -11,9 +11,9 @@
 
 struct Material
 {
-    glm::vec4 emission; // vec3, but padded
-    glm::vec4 ambient;  // vec3, but padded
-    glm::vec4 diffuse;  // vec3, but padded
+    glm::vec4 emission; 
+    glm::vec4 ambient;  
+    glm::vec4 diffuse; 
     glm::vec3 specular;
     GLfloat shininess;
 };
@@ -105,23 +105,23 @@ void Car::update(float deltaTime)
     carModel = glm::mat4(1.0f);
     carModel = glm::translate(carModel, position);
     carModel = glm::rotate(carModel, orientation.y, glm::vec3(0.0f, 1.0f, 0.0f));
-    carModel = glm::rotate(carModel, orientation.y, glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
-void Car::draw(glm::mat4& projView)
-{
+
+void Car::draw(glm::mat4& projView, glm::mat4& view) {
 
     projectionView_ = projView;
+    view_ = view;
 
-        currentMatrix_ = glm::translate(glm::mat4(1.0f), position);
+    currentMatrix_ = glm::translate(glm::mat4(1.0f), position);
     currentMatrix_ = glm::rotate(currentMatrix_, orientation.y, glm::vec3(0.0f, 1.0f, 0.0f));
 
     glm::mat4 carRoot = currentMatrix_;
     drawFrame();
     currentMatrix_ = carRoot;
     drawWheels();
-
 }
+
 
 void Car::drawWindows(glm::mat4& projView, glm::mat4& view)
 {
@@ -168,8 +168,8 @@ void Car::drawFrame()
     glm::mat4 frameMatrix = glm::translate(currentMatrix_, glm::vec3(0.0f, 0.25f, 0.0f));
     glm::mat4 mvp = projectionView_ * frameMatrix;
 
-    glUniformMatrix4fv(mvpUniformLocation, 1, GL_FALSE, glm::value_ptr(mvp));
-    glUniform3f(colorModUniformLocation, 1.0f, 1.0f, 1.0f);
+    // NEW - use the CelShading shader's setMatrices
+    celShadingShader->setMatrices(mvp, view_, frameMatrix);
     frame_.draw();
     currentMatrix_ = frameMatrix; 
     drawHeadlights();
@@ -184,8 +184,7 @@ void Car::drawWheel(float offset)
 
 
     glm::mat4 mvp = projectionView_ * currentMatrix_;
-    glUniformMatrix4fv(mvpUniformLocation, 1, GL_FALSE, glm::value_ptr(mvp));
-
+    celShadingShader->setMatrices(mvp, view_, currentMatrix_);
     wheel_.draw();
 }
 
@@ -200,7 +199,6 @@ void Car::drawWheels()
     };
 
     glm::mat4 carRoot = currentMatrix_;
-    glUniform3f(colorModUniformLocation, 1.0f, 1.0f, 1.0f);
 
     for (int i = 0; i < 4; ++i)
     {
@@ -240,8 +238,8 @@ void Car::drawBlinker()
 
     blinkerM = glm::translate(blinkerM, glm::vec3(0.0f, 0.0f, -0.06065f));
 
-    glUniform3fv(colorModUniformLocation, 1, glm::value_ptr(color));
-    glUniformMatrix4fv(mvpUniformLocation, 1, GL_FALSE, glm::value_ptr(projectionView_ * blinkerM));
+    glm::mat4 mvp = projectionView_ * blinkerM;
+    celShadingShader->setMatrices(mvp, view_, blinkerM);
     blinker_.draw();
 
     // TODO: À ajouter dans votre méthode. À compléter pour la partie 3.
@@ -282,8 +280,8 @@ void Car::drawLight()
             : glm::vec3(0.5f, 0.1f, 0.1f);
     }
 
-    glUniform3fv(colorModUniformLocation, 1, glm::value_ptr(color));
-    glUniformMatrix4fv(mvpUniformLocation, 1, GL_FALSE, glm::value_ptr(projectionView_ * lightMatrix));
+    glm::mat4 mvp = projectionView_ * lightMatrix;
+    celShadingShader->setMatrices(mvp, view_, lightMatrix);
     light_.draw();
 
     const glm::vec3 FRONT_ON_COLOR(1.0f, 1.0f, 1.0f);
@@ -311,22 +309,22 @@ void Car::drawLight()
         10.0f
     };
 
-    if (isFront)
-    {
-        // if (isHeadlightOn)
-        //    TODO: Modifier le matériel pour qu'il ait l'air d'émettre de la lumière.
-        //    ... = glm::vec4(FRONT_ON_COLOR, 0);
+    //if (isFront)
+    //{
+    //    // if (isHeadlightOn)
+    //    //    TODO: Modifier le matériel pour qu'il ait l'air d'émettre de la lumière.
+    //    //    ... = glm::vec4(FRONT_ON_COLOR, 0);
 
-        // TODO: Envoyer le matériel au shader. Partie 3.
-    }
-    else
-    {
-        // if (isBraking)
-        //    TODO: Modifier le matériel pour qu'il ait l'air d'émettre de la lumière.
-        //    ... = glm::vec4(REAR_ON_COLOR, 0);
+    //    // TODO: Envoyer le matériel au shader. Partie 3.
+    //}
+    //else
+    //{
+    //    // if (isBraking)
+    //    //    TODO: Modifier le matériel pour qu'il ait l'air d'émettre de la lumière.
+    //    //    ... = glm::vec4(REAR_ON_COLOR, 0);
 
-        // TODO: Envoyer le matériel au shader. Partie 3.
-    }
+    //    // TODO: Envoyer le matériel au shader. Partie 3.
+    //}
 }
 
 

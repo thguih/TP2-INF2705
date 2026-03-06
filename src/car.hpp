@@ -45,6 +45,7 @@ private:
     Model windows[6];
     glm::mat4 projectionView_;
     glm::mat4 currentMatrix_;
+    glm::mat4 view_;
 
     
 public:
@@ -69,10 +70,7 @@ public:
     
     bool isBlinkerOn;
     float blinkerTimer;
-    bool isDrawingLeftSide;
-    
-    GLuint colorModUniformLocation;
-    GLuint mvpUniformLocation;
+    bool isDrawingLeftSide;   
 };
 
 
