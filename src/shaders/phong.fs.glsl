@@ -73,9 +73,13 @@ float computeSpot(in float openingAngle, in float exponent, in vec3 spotDir, in 
 {
     float spotFactor = 0.0;
     
-    // TODO: Calcul de spotlight, l'algorithme classique d'OpenGL vu en classe (voir annexe).
+    float cosGamma = dot(normalize(lightDir), normalize(spotDir));
+    float cosDelta = cos(radians(openingAngle));
+
+    if (cosGamma > cosDelta)
+        spotFactor = pow(cosGamma, exponent);
     
-    return spotFactor;
+    return spotFactor
 }
 
 void main()
