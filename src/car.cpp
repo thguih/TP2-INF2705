@@ -116,6 +116,9 @@ void Car::draw(glm::mat4& projView, glm::mat4& view) {
     currentMatrix_ = glm::translate(glm::mat4(1.0f), position);
     currentMatrix_ = glm::rotate(currentMatrix_, orientation.y, glm::vec3(0.0f, 1.0f, 0.0f));
 
+    glActiveTexture(GL_TEXTURE0);
+    carTexture->use();
+    
     glm::mat4 carRoot = currentMatrix_;
     drawFrame();
     currentMatrix_ = carRoot;

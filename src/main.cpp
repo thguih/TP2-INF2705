@@ -167,6 +167,8 @@ struct App : public OpenGLApplication
         car_.edgeEffectShader = &edgeEffectShader_;
         car_.celShadingShader = &celShadingShader_;
         car_.material = &material_;
+        car_.carTexture = &carTexture_;
+        car_.carWindowTexture = &carWindowTexture_;
 
         cameraPosition_ = glm::vec3(0.f, 5.f, 25.f);
         cameraOrientation_ = glm::vec2(-0.25f, 0.f);
@@ -192,7 +194,7 @@ struct App : public OpenGLApplication
         grassTexture_.setFiltering(GL_LINEAR);
         grassTexture_.enableMipmap();
 
-        /*streetTexture_.load("../textures/street.jpg");
+        streetTexture_.load("../textures/street.jpg");
         streetTexture_.setWrap(GL_REPEAT);
         streetTexture_.setFiltering(GL_LINEAR);
         streetTexture_.enableMipmap();
@@ -217,7 +219,7 @@ struct App : public OpenGLApplication
         carWindowTexture_.load("../textures/window.png");
         carWindowTexture_.setWrap(GL_CLAMP_TO_EDGE);
         carWindowTexture_.setFiltering(GL_NEAREST);
-	    */
+	    
         
         // TODO: Chargement des deux skyboxes.
         
@@ -228,7 +230,7 @@ struct App : public OpenGLApplication
             "../textures/skybox/Daylight Box_Bottom.bmp",
             "../textures/skybox/Daylight Box_Front.bmp",
             "../textures/skybox/Daylight Box_Back.bmp",
-        };
+        };        
         
         const char* nightPathes[] = {
             "../textures/skyboxNight/right.png",
@@ -238,6 +240,9 @@ struct App : public OpenGLApplication
             "../textures/skyboxNight/front.png",
             "../textures/skyboxNight/back.png",
         };
+
+        skyboxTexture_.load(pathes);
+        skyboxNightTexture_.load(nightPathes);
         
         loadModels();        
         initStaticModelMatrices();
@@ -347,8 +352,8 @@ struct App : public OpenGLApplication
         //       des modèles. Voir "model_data.hpp".
 
         grass_.load(ground, sizeof(ground), planeElements, sizeof(planeElements));
-        /*street_.load(street, sizeof(street), planeElements, sizeof(planeElements));
-        streetcorner_.load(streetcorner, sizeof(streetcorner), planeElements, sizeof(planeElements));*/
+        street_.load(street, sizeof(street), planeElements, sizeof(planeElements));
+        streetcorner_.load(streetcorner, sizeof(streetcorner), planeElements, sizeof(planeElements));
     }
     
     // Méthode pour le calcul des matrices initiales des arbres et des lampadaires.

@@ -5,6 +5,7 @@
 
 #include "model.hpp"
 #include "uniform_buffer.hpp"
+#include <textures.hpp>
 
 class EdgeEffect;
 class CelShading;
@@ -55,6 +56,9 @@ public:
     EdgeEffect* edgeEffectShader = nullptr;
     CelShading* celShadingShader = nullptr;
     UniformBuffer* material = nullptr;
+
+    Texture2D* carTexture = nullptr;
+    Texture2D* carWindowTexture = nullptr;
 
     glm::vec3 position;
     glm::vec2 orientation;    
