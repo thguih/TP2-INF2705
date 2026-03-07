@@ -148,22 +148,39 @@ void Car::drawWindows(glm::mat4& projView, glm::mat4& view)
     //       Les fenêtres doivent être visibles des deux sens.
     //       Il est important de restaurer l'état du contexte qui a été modifié à la fin de la méthode.
 
+    glm::mat4 carBase = glm::translate(glm::mat4(1.0f), position);
+    carBase = glm::rotate(carBase, orientation.y, glm::vec3(0.0f, 1.0f, 0.0f));
+    carBase = glm::translate(carBase, glm::vec3(0.0f, 0.25f, 0.0f));
+
 
     // Les fenêtres sont par rapport au chassi, à considérer dans votre matrice
     // model = glm::translate(model, glm::vec3(0.0f, 0.25f, 0.0f));
 
     std::map<float, unsigned int> sorted;
     for (unsigned int i = 0; i < 6; i++)
-    {
-        // TODO: Calcul de la distance par rapport à l'observateur (utiliser la matrice de vue!)
-        //       et faite une insertion dans le map
+    {        
+        glm::vec4 viewPos = view * carBase * glm::vec4(WINDOW_POSITION[i], 1.0f);
+        sorted[-viewPos.z] = i;
     }
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glDisable(GL_CULL_FACE);
+
+    glActiveTexture(GL_TEXTURE0);
+    carWindowTexture->use();
 
     // TODO: Itération à l'inverse (de la plus grande distance jusqu'à la plus petit)
     for (std::map<float, unsigned int>::reverse_iterator it = sorted.rbegin(); it != sorted.rend(); ++it)
     {
         // TODO: Dessin des fenêtres
+        glm::mat4 mvp = projView * carBase;
+        celShadingShader->setMatrices(mvp, view, carBase);
+        windows[it->second].draw();
     }
+
+    glDisable(GL_BLEND);
+    glEnable(GL_CULL_FACE);
 }
     
 void Car::drawFrame()
@@ -234,11 +251,13 @@ void Car::drawBlinker()
     const glm::vec3 OFF_COLOR(0.5f, 0.35f, 0.15f);
     glm::vec3 color = (isBlinkerOn && isBlinkerActivated) ? ON_COLOR : OFF_COLOR;
 
+    Material blinkerMat = { {0,0,0,0}, {color,0}, {color,0}, {color}, 10.0f };
+    material->updateData(&blinkerMat, 0, sizeof(blinkerMat));
+
     glm::mat4 blinkerM = currentMatrix_;
 
     if (!isDrawingLeftSide)
         blinkerM = glm::scale(blinkerM, glm::vec3(-1.0f, 1.0f, 1.0f));
-
     blinkerM = glm::translate(blinkerM, glm::vec3(0.0f, 0.0f, -0.06065f));
 
     glm::mat4 mvp = projectionView_ * blinkerM;
@@ -246,14 +265,14 @@ void Car::drawBlinker()
     blinker_.draw();
 
     // TODO: À ajouter dans votre méthode. À compléter pour la partie 3.
-    Material blinkerMat =
+    /*Material blinkerMat =
     {
         {0.0f, 0.0f, 0.0f, 0.0f},
         {OFF_COLOR, 0.0f},
         {OFF_COLOR, 0.0f},
         {OFF_COLOR},
         10.0f
-    };
+    };*/
 
     //if (isBlinkerOn && isBlinkerActivated)
     //    TODO: Modifier le matériel pour qu'il ait l'air d'émettre de la lumière.
@@ -267,30 +286,33 @@ void Car::drawBlinker()
 
 void Car::drawLight()
 {
-    glm::mat4 lightMatrix = glm::translate(currentMatrix_, glm::vec3(0.0f, 0.0f, 0.029f));
-
-    const bool isFront = isDrawingFront_;
-
-    glm::vec3 color;
-    if (isFront)
-    {
-        color = isHeadlightOn ? glm::vec3(1.0f, 1.0f, 1.0f)
-            : glm::vec3(0.5f, 0.5f, 0.5f);
-    }
-    else
-    {
-        color = isBraking ? glm::vec3(1.0f, 0.1f, 0.1f)
-            : glm::vec3(0.5f, 0.1f, 0.1f);
-    }
-
-    glm::mat4 mvp = projectionView_ * lightMatrix;
-    celShadingShader->setMatrices(mvp, view_, lightMatrix);
-    light_.draw();
 
     const glm::vec3 FRONT_ON_COLOR(1.0f, 1.0f, 1.0f);
     const glm::vec3 FRONT_OFF_COLOR(0.5f, 0.5f, 0.5f);
     const glm::vec3 REAR_ON_COLOR(1.0f, 0.1f, 0.1f);
     const glm::vec3 REAR_OFF_COLOR(0.5f, 0.1f, 0.1f);
+
+
+    glm::mat4 lightMatrix = glm::translate(currentMatrix_, glm::vec3(0.0f, 0.0f, 0.029f));
+
+    const bool isFront = isDrawingFront_;    
+
+    Material lightMat;
+    if (isFront) {
+        glm::vec3 c = isHeadlightOn ? FRONT_ON_COLOR : FRONT_OFF_COLOR;
+        lightMat = {{0,0,0,0}, {c,0}, {c,0}, {c}, 10.0f };
+    }
+    else {
+        glm::vec3 c = isBraking ? REAR_ON_COLOR : REAR_OFF_COLOR;
+        lightMat = { {0,0,0,0}, {c,0}, {c,0}, {c}, 10.0f };
+    }
+    material->updateData(&lightMat, 0, sizeof(lightMat));
+
+    glm::mat4 mvp = projectionView_ * lightMatrix;
+    celShadingShader->setMatrices(mvp, view_, lightMatrix);
+    light_.draw();
+
+    
 
     // TODO: À ajouter dans votre méthode. À compléter pour la partie 3.
 
