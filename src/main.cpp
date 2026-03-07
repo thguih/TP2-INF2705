@@ -222,6 +222,10 @@ struct App : public OpenGLApplication
         carWindowTexture_.load("../textures/window.png");
         carWindowTexture_.setWrap(GL_CLAMP_TO_EDGE);
         carWindowTexture_.setFiltering(GL_NEAREST);
+
+        streetlightLightTexture_.load("../textures/light.png");
+        streetlightLightTexture_.setWrap(GL_CLAMP_TO_EDGE);
+        streetlightLightTexture_.setFiltering(GL_NEAREST);
 	    
         
         // TODO: Chargement des deux skyboxes.

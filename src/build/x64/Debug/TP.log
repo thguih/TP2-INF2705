@@ -1,48 +1,53 @@
-﻿  car.cpp
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0xedd that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0xeef that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0xf69 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0xf81 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0xfd3 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x100d that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x101d that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1026 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1077 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x109c that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x10c1 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x10cf that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x111a that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1131 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x113b that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x114d that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1245 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1267 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x126f that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1473 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x147b that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x14a9 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x154c that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x20cf that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x20e5 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x20ed that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x20f4 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2209 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2226 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2238 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2287 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x265d that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2673 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x267b that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2682 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x287d that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x289a that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x28ac that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x290a that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2986 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x29a3 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x29b5 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2a12 that is illegal in the current source character set (codepage 65001).
-C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\car.cpp(81,60): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+﻿  main.cpp
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\utils.hpp(95,103): warning C4244: 'argument': conversion from '_Rep' to 'unsigned int', possible loss of data
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\utils.hpp(95,103): warning C4244:         with
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\utils.hpp(95,103): warning C4244:         [
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\utils.hpp(95,103): warning C4244:             _Rep=std::chrono::system_clock::rep
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\utils.hpp(95,103): warning C4244:         ]
+  (compiling source file 'main.cpp')
+  
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(298,43): warning C4244: '=': conversion from 'const T' to 'float', possible loss of data
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(298,43): warning C4244:         with
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(298,43): warning C4244:         [
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(298,43): warning C4244:             T=unsigned int
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(298,43): warning C4244:         ]
+  (compiling source file 'main.cpp')
+  
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(299,43): warning C4244: '=': conversion from 'const T' to 'float', possible loss of data
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(299,43): warning C4244:         with
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(299,43): warning C4244:         [
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(299,43): warning C4244:             T=unsigned int
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(299,43): warning C4244:         ]
+  (compiling source file 'main.cpp')
+  
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,54): warning C4244: 'argument': conversion from 'const T' to 'float', possible loss of data
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,54): warning C4244:         with
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,54): warning C4244:         [
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,54): warning C4244:             T=int
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,54): warning C4244:         ]
+  (compiling source file 'main.cpp')
+  
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,39): warning C4244: 'argument': conversion from 'const T' to 'float', possible loss of data
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,39): warning C4244:         with
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,39): warning C4244:         [
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,39): warning C4244:             T=int
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,39): warning C4244:         ]
+  (compiling source file 'main.cpp')
+  
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(360,51): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(360,51): warning C4244:         with
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(360,51): warning C4244:         [
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(360,51): warning C4244:             T=unsigned int
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(360,51): warning C4244:         ]
+  (compiling source file 'main.cpp')
+  
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(361,51): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(361,51): warning C4244:         with
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(361,51): warning C4244:         [
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(361,51): warning C4244:             T=unsigned int
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(361,51): warning C4244:         ]
+  (compiling source file 'main.cpp')
+  
   TP.vcxproj -> C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\build\x64\Debug\TP.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.
