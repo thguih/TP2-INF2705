@@ -18,7 +18,6 @@ in LIGHTS_VS_OUT
     vec3 spotLightsSpotDir[MAX_SPOT_LIGHTS];
 } lightsIn;
 
-
 struct Material
 {
     vec3 emission;
@@ -67,81 +66,90 @@ uniform sampler2D diffuseSampler;
 
 out vec4 FragColor;
 
-
-float computeSpot(in float openingAngle, in float exponent, in vec3 spotDir, in vec3 lightDir, in vec3 normal)
+float computeSpot(in float openingAngle, in float exponent, in vec3 spotDir, in vec3 lightDir)
 {
-    float spotFactor = 0.0;
-    
     float cosGamma = dot(normalize(lightDir), normalize(spotDir));
     float cosDelta = cos(radians(openingAngle));
 
     if (cosGamma > cosDelta)
-        spotFactor = pow(cosGamma, exponent);
-    
-    return spotFactor;
+        return pow(cosGamma, exponent);
+
+    return 0.0;
 }
 
 void main()
 {
-    vec3 N = normalize(attribsIn.normal);
+    vec4 texColor = texture(diffuseSampler, attribsIn.texCoords);
+
     vec3 O = normalize(lightsIn.obsPos);
 
-    vec4 texColor = texture(diffuseSampler, attribsIn.texCoords);
-    vec3 diffuseTex = texColor.rgb * mat.diffuse;
+    // Normalisation après rasterisation
+    vec3 N = normalize(attribsIn.normal);
 
-    vec3 color = mat.emission + globalAmbient * mat.ambient;
+    // Utile pour les objets dessinés double-face comme l’arbre
+    if (!gl_FrontFacing)
+        N = -N;
 
+    vec3 kd = texColor.rgb * mat.diffuse;
+    vec3 color = mat.emission;
+
+    // Ambiant global + lumière directionnelle ambiante
+    color += kd * globalAmbient * mat.ambient;
+    color += kd * dirLight.ambient * mat.ambient;
+
+    // Lumière directionnelle
     {
         vec3 L = normalize(-lightsIn.dirLightDir);
+
         float diff = max(dot(N, L), 0.0);
+        vec3 diffuseTerm = dirLight.diffuse * kd * diff;
 
-        // Cel shading: quantize diffuse and specular
-        const float LEVELS = 4.0;
-        diff = floor(diff * LEVELS) / LEVELS;
-
-        vec3 R = reflect(-L, N);
-        float spec = 0.0;
+        vec3 specularTerm = vec3(0.0);
         if (diff > 0.0)
         {
-            spec = pow(max(dot(R, O), 0.0), mat.shininess);
-            spec = floor(spec * LEVELS) / LEVELS;
+            vec3 R = reflect(-L, N);
+            float spec = pow(max(dot(R, O), 0.0), mat.shininess);
+            specularTerm = dirLight.specular * mat.specular * spec;
         }
 
-        color += dirLight.ambient * mat.ambient;
-        color += dirLight.diffuse * diffuseTex * diff;
-        color += dirLight.specular * mat.specular * spec;
+        color += diffuseTerm + specularTerm;
     }
 
+    // Spotlights
     for (int i = 0; i < nSpotLights; i++)
     {
-        vec3 L = lightsIn.spotLightsDir[i];
-        float dist = length(L);
-        L = normalize(L);
+        vec3 Lvec = lightsIn.spotLightsDir[i];
+        float dist = length(Lvec);
+        vec3 L = normalize(Lvec);
 
         float spotFactor = computeSpot(
             spotLights[i].openingAngle,
             spotLights[i].exponent,
             lightsIn.spotLightsSpotDir[i],
-            L,
-            N
+            L
         );
 
         if (spotFactor > 0.0)
         {
+            // Atténuation personnalisée du TP
             float attenuation = 1.0 - smoothstep(7.0, 10.0, dist);
 
             float diff = max(dot(N, L), 0.0);
-            vec3 R = reflect(-L, N);
-            float spec = 0.0;
-            if (diff > 0.0)
-                spec = pow(max(dot(R, O), 0.0), mat.shininess);
+            vec3 diffuseTerm = spotLights[i].diffuse * kd * diff;
 
-            color += spotLights[i].ambient * mat.ambient;
-            color += spotLights[i].diffuse * diffuseTex * diff * spotFactor * attenuation;
-            color += spotLights[i].specular * mat.specular * spec * spotFactor * attenuation;
+            vec3 specularTerm = vec3(0.0);
+            if (diff > 0.0)
+            {
+                vec3 R = reflect(-L, N);
+                float spec = pow(max(dot(R, O), 0.0), mat.shininess);
+                specularTerm = spotLights[i].specular * mat.specular * spec;
+            }
+
+            vec3 ambientTerm = spotLights[i].ambient * kd * mat.ambient;
+
+            color += (ambientTerm + diffuseTerm + specularTerm) * spotFactor * attenuation;
         }
     }
 
     FragColor = vec4(color, texColor.a);
 }
-

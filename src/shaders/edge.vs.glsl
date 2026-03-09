@@ -7,6 +7,6 @@ uniform mat4 mvp;
 
 void main()
 {
-	vec3 expandedPos = position + normal * 0.05;
-	gl_Position = mvp * vec4(expandedPos, 1.0);
+    vec3 expandedPos = position + normal * 0.015;
+    gl_Position = mvp * vec4(expandedPos, 1.0);
 }

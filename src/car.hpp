@@ -23,19 +23,26 @@ public:
 
     void draw(glm::mat4& projView, glm::mat4& view);
 
+    // PARTIE 2 - contour
+    void drawOutline(glm::mat4& projView, glm::mat4& view);
+
     void drawWindows(glm::mat4& projView, glm::mat4& view);
     
 private:
     
     void drawFrame();
+    void drawFrameOutline();     // PARTIE 2
     
     void drawWheel(float offset);
+    void drawWheelOutline(float offset);   // PARTIE 2
     void drawWheels();
+    void drawWheelsOutline();              // PARTIE 2
     
     void drawBlinker();
     void drawLight();    
     void drawHeadlight();
     void drawHeadlights();
+    void drawHeadlightsOutline();          // PARTIE 2
     
 private:    
     Model frame_;
@@ -44,10 +51,10 @@ private:
     Model light_;
 
     Model windows[6];
+
     glm::mat4 projectionView_;
     glm::mat4 currentMatrix_;
     glm::mat4 view_;
-
     
 public:
 
@@ -66,15 +73,15 @@ public:
     float speed;
     float wheelsRollAngle;
     float steeringAngle;
+
     bool isHeadlightOn;
     bool isBraking;
     bool isLeftBlinkerActivated;
     bool isRightBlinkerActivated;
+
     bool isDrawingFront_ = true;
     
     bool isBlinkerOn;
     float blinkerTimer;
     bool isDrawingLeftSide;   
 };
-
-
