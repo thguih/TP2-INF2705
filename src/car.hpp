@@ -40,7 +40,6 @@ private:
     
     void drawBlinker();
     void drawLight();    
-    void drawHeadlight();
     void drawHeadlights();
     void drawHeadlightsOutline();          // PARTIE 2
     

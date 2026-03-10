@@ -362,7 +362,7 @@ void Car::drawBlinker()
 
     glm::mat4 blinkerM = currentMatrix_;
     
-    blinkerM = glm::translate(blinkerM, glm::vec3(0.0f, -0.0000005f, -0.06065f));
+    blinkerM = glm::translate(blinkerM, glm::vec3(0.0f, -0.00005f, -0.06065f));
 
     
     glm::mat4 mvp = projectionView_ * blinkerM;
@@ -400,14 +400,6 @@ void Car::drawLight()
     light_.draw();
 }
 
-//void Car::drawHeadlight()
-//{
-//    glm::mat4 headlightRoot = currentMatrix_;
-//    drawLight();
-//    currentMatrix_ = headlightRoot;
-//    drawBlinker();
-//    currentMatrix_ = headlightRoot;
-//}
 
 void Car::drawHeadlights()
 {
@@ -449,10 +441,10 @@ void Car::drawHeadlightsOutline()
 {
     const glm::vec3 HEADLIGHT_POSITIONS[] =
     {
-        glm::vec3(-1.9650f, 0.38f, -0.45f),
-        glm::vec3(-1.9650f, 0.38f, 0.45f),
+        glm::vec3(-2.0019f, 0.38f, -0.45f),
+        glm::vec3(-2.0019f, 0.38f,  0.45f),
         glm::vec3(2.0019f, 0.38f, -0.45f),
-        glm::vec3(2.0019f, 0.38f, 0.45f)
+        glm::vec3(2.0019f, 0.38f,  0.45f)
     };
 
     glm::mat4 frameBase = currentMatrix_;
