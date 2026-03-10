@@ -349,8 +349,8 @@ void Car::drawWheelsOutline()
 void Car::drawBlinker()
 {
     const bool isBlinkerActivated =
-        (isDrawingLeftSide && isRightBlinkerActivated) ||
-        (!isDrawingLeftSide && isLeftBlinkerActivated);
+        (isDrawingLeftSide && isLeftBlinkerActivated) ||
+        (!isDrawingLeftSide && isRightBlinkerActivated);
 
     const glm::vec3 ON_COLOR(1.0f, 0.7f, 0.3f);
     const glm::vec3 OFF_COLOR(0.5f, 0.35f, 0.15f);
@@ -365,6 +365,7 @@ void Car::drawBlinker()
         blinkerM = glm::scale(blinkerM, glm::vec3(-1.0f, 1.0f, 1.0f));
     blinkerM = glm::translate(blinkerM, glm::vec3(0.0f, 0.0f, -0.06065f));
 
+    
     glm::mat4 mvp = projectionView_ * blinkerM;
     celShadingShader->setMatrices(mvp, view_, blinkerM);
     blinker_.draw();
@@ -384,12 +385,14 @@ void Car::drawLight()
     if (isFront)
     {
         glm::vec3 c = isHeadlightOn ? FRONT_ON_COLOR : FRONT_OFF_COLOR;
-        lightMat = { {0, 0, 0, 0}, {c, 0}, {c, 0}, {c}, 10.0f };
+        glm::vec3 e = isHeadlightOn ? FRONT_ON_COLOR : glm::vec3(0.0f);
+        lightMat = { {e, 0}, {c, 0}, {c, 0}, {c}, 10.0f };
     }
     else
     {
         glm::vec3 c = isBraking ? REAR_ON_COLOR : REAR_OFF_COLOR;
-        lightMat = { {0, 0, 0, 0}, {c, 0}, {c, 0}, {c}, 10.0f };
+        glm::vec3 e = isBraking ? REAR_ON_COLOR : glm::vec3(0.0f);
+        lightMat = { {e, 0}, {c, 0}, {c, 0}, {c}, 10.0f };
     }
     material->updateData(&lightMat, 0, sizeof(lightMat));
 
@@ -411,10 +414,10 @@ void Car::drawHeadlights()
 {
     const glm::vec3 HEADLIGHT_POSITIONS[] =
     {
-        glm::vec3(-1.9650f, 0.38f, -0.45f),
-        glm::vec3(-1.9650f, 0.38f, 0.45f),
+        glm::vec3(-2.0019f, 0.38f, -0.45f),
+        glm::vec3(-2.0019f, 0.38f,  0.45f),
         glm::vec3(2.0019f, 0.38f, -0.45f),
-        glm::vec3(2.0019f, 0.38f, 0.45f)
+        glm::vec3(2.0019f, 0.38f,  0.45f)
     };
 
     glm::mat4 frameBase = currentMatrix_;
