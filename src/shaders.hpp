@@ -10,12 +10,10 @@
 // Voir exemple avec le shader du tp1, considérant les variables uniformes dans le shader:
 
 
-// TODO: Compléter ou ajouter ici bas:
 
 class EdgeEffect : public ShaderProgram
 {
 public:
-    // TODO: Uniform location ou autre
     GLuint mvpULoc;
 
 protected:
@@ -27,7 +25,6 @@ protected:
 class Sky : public ShaderProgram
 {
 public:
-    // TODO: Uniform location ou autre
     GLuint mvpULoc;
 
 

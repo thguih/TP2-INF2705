@@ -1,4 +1,3 @@
-// TODO: À ajouter et compléter dans votre projet.
 #include <cstddef>
 #include <cstdint>
 #include <array>

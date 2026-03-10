@@ -4,13 +4,6 @@
 
 using namespace gl;
 
-
-// TODO: Nouvelle implémentation de Model::load() pour le chargement des nouveaux
-//       attributs. À ajouter à votre classe actuelle.
-
-// TODO: Nouvelle définition de Model::load() à utiliser pour le sol et la route.
-//       À ajouter à votre classe actuelle.
-
 struct PositionAttribute
 {
     float x, y, z;

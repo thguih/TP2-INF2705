@@ -1,4 +1,63 @@
 ﻿  car.cpp
+  main.cpp
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\utils.hpp(95,103): warning C4244: 'argument': conversion from '_Rep' to 'unsigned int', possible loss of data
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\utils.hpp(95,103): warning C4244:         with
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\utils.hpp(95,103): warning C4244:         [
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\utils.hpp(95,103): warning C4244:             _Rep=std::chrono::system_clock::rep
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\utils.hpp(95,103): warning C4244:         ]
+  (compiling source file 'main.cpp')
+  
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(298,43): warning C4244: '=': conversion from 'const T' to 'float', possible loss of data
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(298,43): warning C4244:         with
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(298,43): warning C4244:         [
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(298,43): warning C4244:             T=unsigned int
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(298,43): warning C4244:         ]
+  (compiling source file 'main.cpp')
+  
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(299,43): warning C4244: '=': conversion from 'const T' to 'float', possible loss of data
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(299,43): warning C4244:         with
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(299,43): warning C4244:         [
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(299,43): warning C4244:             T=unsigned int
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(299,43): warning C4244:         ]
+  (compiling source file 'main.cpp')
+  
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,54): warning C4244: 'argument': conversion from 'const T' to 'float', possible loss of data
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,54): warning C4244:         with
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,54): warning C4244:         [
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,54): warning C4244:             T=int
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,54): warning C4244:         ]
+  (compiling source file 'main.cpp')
+  
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,39): warning C4244: 'argument': conversion from 'const T' to 'float', possible loss of data
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,39): warning C4244:         with
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,39): warning C4244:         [
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,39): warning C4244:             T=int
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(318,39): warning C4244:         ]
+  (compiling source file 'main.cpp')
+  
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(360,51): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(360,51): warning C4244:         with
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(360,51): warning C4244:         [
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(360,51): warning C4244:             T=unsigned int
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(360,51): warning C4244:         ]
+  (compiling source file 'main.cpp')
+  
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(361,51): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(361,51): warning C4244:         with
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(361,51): warning C4244:         [
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(361,51): warning C4244:             T=unsigned int
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\inf2705\OpenGLApplication.hpp(361,51): warning C4244:         ]
+  (compiling source file 'main.cpp')
+  
+  model.cpp
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\model.cpp(169,31): warning C4267: '=': conversion from 'size_t' to 'gl::GLsizei', possible loss of data
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\model.cpp(57,32): warning C4101: 'e': unreferenced local variable
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\model.cpp(69,32): warning C4101: 'e': unreferenced local variable
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\model.cpp(80,32): warning C4101: 'e': unreferenced local variable
+C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\model.cpp(199,27): warning C4267: '=': conversion from 'size_t' to 'gl::GLsizei', possible loss of data
+  shaders.cpp
+  textures.cpp
+  Generating Code...
   TP.vcxproj -> C:\Users\natan\Session 6 polymtl\INF2705\TP2-INF2705\src\build\x64\Debug\TP.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.

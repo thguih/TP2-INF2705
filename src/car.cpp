@@ -356,14 +356,13 @@ void Car::drawBlinker()
     const glm::vec3 OFF_COLOR(0.5f, 0.35f, 0.15f);
     const glm::vec3 color = (isBlinkerOn && isBlinkerActivated) ? ON_COLOR : OFF_COLOR;
 
-    Material blinkerMat = { {0, 0, 0, 0}, {color, 0}, {color, 0}, {color}, 10.0f };
+    glm::vec3 e = (isBlinkerOn && isBlinkerActivated) ? ON_COLOR : glm::vec3(0.0f);
+    Material blinkerMat = { {e, 0}, {color, 0}, {color, 0}, {color}, 10.0f };
     material->updateData(&blinkerMat, 0, sizeof(blinkerMat));
 
     glm::mat4 blinkerM = currentMatrix_;
-
-    if (!isDrawingLeftSide)
-        blinkerM = glm::scale(blinkerM, glm::vec3(-1.0f, 1.0f, 1.0f));
-    blinkerM = glm::translate(blinkerM, glm::vec3(0.0f, 0.0f, -0.06065f));
+    
+    blinkerM = glm::translate(blinkerM, glm::vec3(0.0f, -0.0000005f, -0.06065f));
 
     
     glm::mat4 mvp = projectionView_ * blinkerM;
@@ -401,14 +400,14 @@ void Car::drawLight()
     light_.draw();
 }
 
-void Car::drawHeadlight()
-{
-    glm::mat4 headlightRoot = currentMatrix_;
-    drawLight();
-    currentMatrix_ = headlightRoot;
-    drawBlinker();
-    currentMatrix_ = headlightRoot;
-}
+//void Car::drawHeadlight()
+//{
+//    glm::mat4 headlightRoot = currentMatrix_;
+//    drawLight();
+//    currentMatrix_ = headlightRoot;
+//    drawBlinker();
+//    currentMatrix_ = headlightRoot;
+//}
 
 void Car::drawHeadlights()
 {
@@ -428,6 +427,9 @@ void Car::drawHeadlights()
 
         isDrawingLeftSide = (HEADLIGHT_POSITIONS[i].z > 0.0f);
         isDrawingFront_ = (HEADLIGHT_POSITIONS[i].x < 0.0f);
+
+        if (isDrawingLeftSide)
+            currentMatrix_ = glm::rotate(currentMatrix_, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
         glm::mat4 headlightBase = currentMatrix_;
 
